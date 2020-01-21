@@ -1,25 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Order from './comp/order';
+// import logo from './logo.svg';
 import './App.css';
+import { Container } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Home from './component/Home';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    height: 140,
+    width: 100,
+  },
+  control: {
+    padding: '14px',
+  },
+}));
 
 function App() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className={classes.control} maxWidth="lg">
+   
+    <Router>
+          <div>
+              {/* <Header subtitle="React"/> */}
+                    <Switch>
+                        <Route path='/' component={Home} exact/>
+                        <Route path='/test' component={Order} exact/>
+                    </Switch>
+              {/* <Footer/> */}
+          </div>
+      </Router>
+      {/* <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} /> */}
+  </Container>
   );
 }
 
