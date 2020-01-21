@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Home() {
+export default function Home(props) {
     const classes = useStyles();
     const [values, setValues] = React.useState({
         email: '',
@@ -46,6 +46,9 @@ export default function Home() {
     });
     const handleChange = prop => event => {
         setValues({ ...values, [prop]: event.target.value });
+        console.log('====================================');
+        console.log(values.email);
+        console.log('====================================');
     };
 
     const handleClickShowPassword = () => {
@@ -55,15 +58,23 @@ export default function Home() {
     const handleMouseDownPassword = event => {
         event.preventDefault();
     };
+    const onReset = () => {
+        console.log("TCL: onReset -> onReset", onReset)
+        props.history.push('/reset');
+    }
+
+    const onLogin = () => {
+        console.log("TCL: onReset -> onReset", onReset)
+        props.history.push('/reset');
+    }
+    
     return (
         <Card className={classes.card} variant="outlined">
             <CardContent>
                 {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
           Word of the Day
         </Typography> */}
-                <Typography variant="h5" component="h2">
-                    Login
-        </Typography>
+                <Typography variant="h5" component="h2">Login</Typography>
                 <div>
                     {/* <TextField
           id="standard-error-helper-text"
@@ -102,7 +113,7 @@ export default function Home() {
                 </div>
             </CardContent>
             <Button variant="contained" color="primary">Login</Button>
-            <Button variant="contained">Reset</Button>
+            <Button variant="contained" onClick={onReset}>Reset</Button>
 
         </Card>
     );

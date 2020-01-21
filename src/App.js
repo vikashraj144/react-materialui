@@ -6,6 +6,7 @@ import './App.css';
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Home from './component/Home';
+import Reset from './component/Reset';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,7 +23,6 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const classes = useStyles();
-
   return (
     <Container className={classes.control} maxWidth="lg">
    
@@ -31,7 +31,7 @@ function App() {
               {/* <Header subtitle="React"/> */}
                     <Switch>
                         <Route path='/' component={Home} exact/>
-                        <Route path='/test' component={Order} exact/>
+                        <Route path='/reset' component={Reset} exact/>
                     </Switch>
               {/* <Footer/> */}
           </div>
