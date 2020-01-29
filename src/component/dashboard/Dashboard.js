@@ -18,7 +18,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 // import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import MainListItems, { secondaryListItems } from './listItems';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
@@ -27,6 +27,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import { ThemeProvider } from '@material-ui/styles';
 import Main from './Main';
+import { Route, useRouteMatch } from 'react-router-dom';
+
 
 const theme = createMuiTheme({
   palette: {
@@ -98,6 +100,7 @@ const useStyles = makeStyles(theme => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  let { path, url } = useRouteMatch();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -124,11 +127,6 @@ export default function Dashboard() {
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
               Dashboard
           </Typography>
-            {/* <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
           </Toolbar>
         </AppBar>
         <Drawer
@@ -144,13 +142,18 @@ export default function Dashboard() {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          <List> <MainListItems></MainListItems></List>
           <Divider />
           <List>{secondaryListItems}</List>
         </Drawer>
-        <Main></Main>
+
+        <Route path={`${path}/`} exact>
+          <Main />
+        </Route>
+        <Route path={`${path}/test`} exact>
+          <Main />
+        </Route>
       </div>
     </ThemeProvider>
-
   );
 }
