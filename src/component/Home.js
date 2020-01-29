@@ -65,9 +65,9 @@ export default function Home(props) {
 
     const onLogin = () => {
         console.log("TCL: onReset -> onReset", onReset)
-        props.history.push('/reset');
+        props.history.push('/dashboard');
     }
-    
+
     return (
         <Card className={classes.card} variant="outlined">
             <CardContent>
@@ -112,7 +112,7 @@ export default function Home(props) {
 
                 </div>
             </CardContent>
-            <Button variant="contained" color="primary">Login</Button>
+            <Button variant="contained" color="primary" onClick= {onLogin}>Login</Button>
             <Button variant="contained" onClick={onReset}>Reset</Button>
 
         </Card>
