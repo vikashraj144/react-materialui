@@ -1,47 +1,63 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-// import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { IconButton, InputAdornment, FormControl, InputLabel, Input } from '@material-ui/core';
-import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import { IconButton, InputAdornment, FormControl, InputLabel, Input, Paper } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
+function Copyright() {
+    return (
+        <Typography variant="body2" color="textSecondary" align="center">
+            {'Copyright © '}
+            <Link color="inherit" href="https://material-ui.com/">
+                Your Website
+      </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
+    );
+}
 
 const useStyles = makeStyles(theme => ({
-    card: {
-        minWidth: 275,
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    }, root: {
+    paper: {
+        marginTop: theme.spacing(8),
         display: 'flex',
-        flexWrap: 'wrap',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
-    margin: {
+    paper2: {
+        marginTop: theme.spacing(8),
+        marginLeft: theme.spacing(2),
+    },
+    avatar: {
         margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
     },
-    withoutLabel: {
-        marginTop: theme.spacing(3),
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
     },
-    textField: {
-        width: 200,
+    submit: {
+        margin: theme.spacing(3, 0, 2),
     },
 }));
 
-export default function Home(props) {
+export default function SignIn(props) {
     const classes = useStyles();
     const [values, setValues] = React.useState({
         email: '',
         password: '',
-        weight: '',
-        weightRange: '',
         showPassword: false,
     });
     const handleChange = prop => event => {
@@ -50,71 +66,93 @@ export default function Home(props) {
         console.log(values.email);
         console.log('====================================');
     };
-
     const handleClickShowPassword = () => {
         setValues({ ...values, showPassword: !values.showPassword });
     };
-
     const handleMouseDownPassword = event => {
         event.preventDefault();
     };
-    const onReset = () => {
-        console.log("TCL: onReset -> onReset", onReset)
-        props.history.push('/reset');
-    }
-
     const onLogin = () => {
-        console.log("TCL: onReset -> onReset", onReset)
         props.history.push('/dashboard');
     }
 
     return (
-        <Card className={classes.card} variant="outlined">
-            <CardContent>
-                {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
-        </Typography> */}
-                <Typography variant="h5" component="h2">Login</Typography>
-                <div>
-                    {/* <TextField
-          id="standard-error-helper-text"
-          label="Email Id"
-          defaultValue=""
-          helperText="Incorrect entry."
-        /> */}
-                    <FormControl className={clsx(classes.margin, classes.textField)}>
-                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                        <Input
-                            id="standard-adornment-email"
-                            type='text'
-                            value={values.email}
-                            onChange={handleChange('email')}
-                        />
-                        <br></br>
-                        <Input
-                            id="standard-adornment-password"
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={values.password}
-                            onChange={handleChange('password')}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                    >
-                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        />
-                    </FormControl>
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Paper className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign in
+                </Typography>
+                {/* <Paper className={classes.paper2}> */}
 
-                </div>
-            </CardContent>
-            <Button variant="contained" color="primary" onClick= {onLogin}>Login</Button>
-            <Button variant="contained" onClick={onReset}>Reset</Button>
+                <form className={classes.form} noValidate>
+                <InputLabel htmlFor="standard-adornment-password">Email</InputLabel>
 
-        </Card>
+                    <Input
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        autoFocus
+                        value={values.email}
+                        onChange={handleChange('email')}
+                    />
+                    <br></br>
+                    <br></br>
+                    
+                    <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                    <Input
+                        id="standard-adornment-password"
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="Password"
+                        type={values.showPassword ? 'text' : 'password'}
+                        value={values.password}
+                        onChange={handleChange('password')}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                    <FormControlLabel
+                        control={<Checkbox value="remember" color="primary" />}
+                        label="Remember me"
+                    />
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        onClick={onLogin}
+                        className={classes.submit}
+                    >
+                        Sign In
+                    </Button>
+                    <Grid container>
+                        <Grid item xs>
+                            <Link href="#" variant="body2">
+                                Forgot password?
+                            </Link>
+                        </Grid>
+                    </Grid>
+                    <br></br>
+                </form>
+                {/* </Paper> */}
+            </Paper>
+            <Box mt={8}>
+                <Copyright />
+            </Box>
+        </Container>
     );
 }
