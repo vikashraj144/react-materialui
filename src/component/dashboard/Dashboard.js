@@ -32,6 +32,7 @@ import Deposits from './Deposits';
 import { Container } from '@material-ui/core';
 import Domain from './Domain';
 import Agency from './Agency';
+import AddDomain from './AddDomain';
 
 
 const theme = createMuiTheme({
@@ -167,6 +168,9 @@ export default function Dashboard() {
           </Route>
           <Route path={`${path}/agency`} exact>
             <Agency></Agency>
+          </Route>
+          <Route path={`${path}/add-domain`} exact>
+            <AddDomain></AddDomain>
           </Route>
         {/* </Container> */}
 

@@ -42,6 +42,9 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
+  btn: {
+    width: '15%'
+  }
 }));
 
 export default function Domain(props) {
@@ -65,6 +68,9 @@ export default function Domain(props) {
   const onDelete = () => {
     props.history.push('/dashboard');
   }
+  const onAddomain = () => {
+    props.history.push('/add-domain');
+  }
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />
@@ -73,10 +79,9 @@ export default function Domain(props) {
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <h2>asdsad</h2>
-              <Button variant="contained" color="primary">
+              <Button variant="contained" className={classes.btn} color="primary" onClick={onAddomain}>
                 Add Domain
-</Button>
+              </Button>
             </Paper>
           </Grid>
           <Grid item xs={12}>
