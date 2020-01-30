@@ -10,7 +10,10 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import { Link } from '@material-ui/core';
+// import { Link } from '@material-ui/core';
+import {
+  Link
+} from "react-router-dom";
 
 export default function MainListItems() {
   let { path, url } = useRouteMatch();
@@ -21,32 +24,33 @@ export default function MainListItems() {
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <Link to={`${url}/rendering`}><ListItemText primary="Dashboard" /></Link>
+        <Link to={`${url}`}><ListItemText primary="Dashboard" /></Link>
       </ListItem>
       <ListItem button>
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
-        <Link to={`${url}/test`}><ListItemText primary="Test" /></Link>
+        <Link to={`${url}/domain`}><ListItemText primary="Domain" /></Link>
       </ListItem>
       <ListItem button>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
-        <ListItemText primary="Customers" />
+        <ListItemText primary="Setting" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
           <BarChartIcon />
         </ListItemIcon>
-        <ListItemText primary="Reports" />
+        {/* <ListItemText primary="Agency" /> */}
+        <Link to={`${url}/agency`}><ListItemText primary="Agency" /></Link>
       </ListItem>
-      <ListItem button>
+      {/* <ListItem button>
         <ListItemIcon>
           <LayersIcon />
         </ListItemIcon>
         <ListItemText primary="Integrations" />
-      </ListItem>
+      </ListItem> */}
     </div>
 
   )
@@ -61,7 +65,7 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Current month" />
     </ListItem>
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
@@ -72,6 +76,6 @@ export const secondaryListItems = (
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Year-end sale" />
-    </ListItem>
+    </ListItem> */}
   </div>
 );

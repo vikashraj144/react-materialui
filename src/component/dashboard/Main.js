@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Title from './Title';
 import { Container, Grid, Paper, Box } from '@material-ui/core';
 import Deposits from './Deposits';
-import Orders from './Orders';
+import Domain from './Domain';
 import clsx from 'clsx';
 
 function preventDefault(event) {
@@ -58,21 +58,21 @@ export default function Main() {
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={4}>
           {/* Chart */}
-          <Grid item xs={12} md={8} lg={9}>
+          {/* <Grid item xs={12} md={8} lg={9}>
             <Paper className={fixedHeightPaper}>
-              {/* <Chart /> */}
+              <Chart />
             </Paper>
-          </Grid>
+          </Grid> */}
           {/* Recent Deposits */}
-          <Grid item xs={12} md={4} lg={3}>
+          {/* <Grid item xs={12} md={4} lg={3}>
             <Paper className={fixedHeightPaper}>
               <Deposits />
             </Paper>
-          </Grid>
+          </Grid> */}
           {/* Recent Orders */}
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Orders />
+              <Domain />
             </Paper>
           </Grid>
         </Grid>

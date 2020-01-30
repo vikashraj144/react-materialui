@@ -31,7 +31,7 @@ function App() {
           <Switch>
             <Route path='/' component={Home} exact />
             <Route path='/reset' component={Reset} exact />
-            <Route path='/dashboard' component={Dashboard} exact />
+            <Route path='/dashboard' component={Dashboard} />
           </Switch>
           {/* <Footer/> */}
       </Router>

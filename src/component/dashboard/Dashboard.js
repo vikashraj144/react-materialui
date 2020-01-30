@@ -28,6 +28,10 @@ import blue from '@material-ui/core/colors/blue';
 import { ThemeProvider } from '@material-ui/styles';
 import Main from './Main';
 import { Route, useRouteMatch } from 'react-router-dom';
+import Deposits from './Deposits';
+import { Container } from '@material-ui/core';
+import Domain from './Domain';
+import Agency from './Agency';
 
 
 const theme = createMuiTheme({
@@ -95,6 +99,10 @@ const useStyles = makeStyles(theme => ({
       width: theme.spacing(9),
     },
   },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
 }));
 
 export default function Dashboard() {
@@ -143,16 +151,25 @@ export default function Dashboard() {
           </div>
           <Divider />
           <List> <MainListItems></MainListItems></List>
-          <Divider />
-          <List>{secondaryListItems}</List>
+          {/* <Divider />
+          <List>{secondaryListItems}</List> */}
         </Drawer>
 
-        <Route path={`${path}/`} exact>
-          <Main />
-        </Route>
-        <Route path={`${path}/test`} exact>
-          <Main />
-        </Route>
+        {/* <Container maxWidth="lg" className={classes.container}> */}
+          <Route path={`${path}/`} exact>
+            <Main />
+          </Route>
+          <Route path={`${path}/test1221`} exact>
+            <Deposits></Deposits>
+          </Route>
+          <Route path={`${path}/domain`} exact>
+            <Domain></Domain>
+          </Route>
+          <Route path={`${path}/agency`} exact>
+            <Agency></Agency>
+          </Route>
+        {/* </Container> */}
+
       </div>
     </ThemeProvider>
   );

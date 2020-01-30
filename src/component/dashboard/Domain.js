@@ -1,24 +1,25 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Title from './Title';
-import { Button, Container, Grid, Paper } from '@material-ui/core';
-import Main from './Main';
+import { Button, Container, Grid, Paper, TableContainer, TablePagination } from '@material-ui/core';
 
-// Generate Order Data
-function createData(id, name, created) {
-  return { id, name, created };
+const columns = [
+  { id: 'domain', label: 'Domain', minWidth: 170 },
+  { id: 'created', label: 'Created', minWidth: 100 },
+  { id: 'configuration', label: 'Configuration', minWidth: 100 },
+  { id: 'deleteBtn', label: 'Delete', minWidth: 50 },
+];
+
+function createData(domain, created, configuration, deleteBtn) {
+  return { domain, created, configuration, deleteBtn };
 }
 
 const rows = [
-  createData(1, 'essa 1', '16 Mar, 2019'),
-  createData(2, 'essa 2, 2019', '16 Mar, 2019'),
-  createData(3, 'essa 3, 2019', '16 Mar, 2019'),
+  createData('India', '19-01-1988', 'config', 'delete'),
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -46,6 +47,18 @@ const useStyles = makeStyles(theme => ({
 export default function Domain(props) {
   const classes = useStyles();
 
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   const onConfiguration = () => {
     props.history.push('/dashboard');
   }
@@ -58,52 +71,87 @@ export default function Domain(props) {
 
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={4}>
-        <Grid item xs={12}>
+          <Grid item xs={12}>
             <Paper className={classes.paper}>
               <h2>asdsad</h2>
+              <Button variant="contained" color="primary">
+                Add Domain
+</Button>
             </Paper>
           </Grid>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Title>Recent added domain</Title>
-              <Table size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Domain</TableCell>
-                    <TableCell>Date</TableCell>
-                    <TableCell> Configuration </TableCell>
-                    <TableCell>Delete</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map(row => (
-                    <TableRow key={row.id}>
-                      <TableCell>{row.name}</TableCell>
-                      <TableCell>{row.created}</TableCell>
-                      <TableCell>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          color="primary"
-                          onClick={onConfiguration}
+              <TableContainer className={classes.container}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {columns.map(column => (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          style={{ minWidth: column.minWidth }}
                         >
-                          Configuration
-                    </Button>
-                      </TableCell>
-                      <TableCell>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          color="primary"
-                          onClick={onDelete}
-                        >
-                          Delete
-                    </Button>
-                      </TableCell>
+                          {column.label}
+                        </TableCell>
+                      ))}
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHead>
+                  <TableBody>
+                    {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
+                      return (
+                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                          {columns.map(column => {
+                            const value = row[column.id];
+                            console.log("TCL: value", value)
+                            if (value == 'delete') {
+                              return (
+                                <TableCell key={column.id} align={column.align}>
+                                  <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                  >
+                                    {value}
+                                  </Button>
+                                </TableCell>
+                              );
+                            } else if (value == 'config') {
+                              return (
+                                <TableCell key={column.id} align={column.align}>
+                                  <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                  >
+                                    {value}
+                                  </Button>
+                                </TableCell>
+                              );
+                            } else
+                              if (value) {
+                                return (
+                                  <TableCell key={column.id} align={column.align}>
+                                    {column.format && typeof value === 'number' ? column.format(value) : value}
+                                  </TableCell>
+                                );
+                              }
+
+                          })}
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
             </Paper>
           </Grid>
         </Grid>
