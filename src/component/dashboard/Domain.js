@@ -1,26 +1,35 @@
 import React from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
-import { Container, Grid, Paper, Box, FormControl, InputLabel, Input } from '@material-ui/core';
-import Deposits from './Deposits';
-import Orders from './Orders';
-import clsx from 'clsx';
+import { Button, Container, Grid, Paper } from '@material-ui/core';
+import Main from './Main';
 
-function preventDefault(event) {
-  event.preventDefault();
+// Generate Order Data
+function createData(id, name, created) {
+  return { id, name, created };
 }
 
+const rows = [
+  createData(1, 'essa 1', '16 Mar, 2019'),
+  createData(2, 'essa 2, 2019', '16 Mar, 2019'),
+  createData(3, 'essa 3, 2019', '16 Mar, 2019'),
+];
+
 const useStyles = makeStyles(theme => ({
+  seeMore: {
+    marginTop: theme.spacing(3),
+  },
   paper: {
     padding: theme.spacing(2),
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
-  },
-  fixedHeight: {
-    height: 240,
   },
   content: {
     flexGrow: 1,
@@ -34,54 +43,72 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-export default function Domain() {
+export default function Domain(props) {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
-    email: '',
-    password: '',
-    weight: '',
-    weightRange: '',
-    showPassword: false,
-  });
-  const handleChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value });
-    console.log('====================================');
-    console.log(values.email);
-    console.log('====================================');
-  };
+
+  const onConfiguration = () => {
+    props.history.push('/dashboard');
+  }
+  const onDelete = () => {
+    props.history.push('/dashboard');
+  }
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />
+
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={4}>
-          {/* Recent Orders */}
+        <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <h2>asdsad</h2>
+            </Paper>
+          </Grid>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              {/* <Orders /> */}
-              <FormControl className={clsx(classes.margin, classes.textField)}>
-                <InputLabel htmlFor="standard-adornment-email">Name</InputLabel>
-                <Input
-                  id="standard-adornment-email"
-                  type='text'
-                  value={values.email}
-                  onChange={handleChange('email')}
-                />
-              </FormControl>
-              <FormControl className={clsx(classes.margin, classes.textField)}>
-                <br></br>
-                <InputLabel htmlFor="standard-adornment-password">Org</InputLabel>
-                <Input
-                  id="standard-adornment-password"
-                  type='text'
-                  value={values.password}
-                  onChange={handleChange('password')}
-                />
-              </FormControl>
+              <Title>Recent added domain</Title>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Domain</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell> Configuration </TableCell>
+                    <TableCell>Delete</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map(row => (
+                    <TableRow key={row.id}>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.created}</TableCell>
+                      <TableCell>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          color="primary"
+                          onClick={onConfiguration}
+                        >
+                          Configuration
+                    </Button>
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          color="primary"
+                          onClick={onDelete}
+                        >
+                          Delete
+                    </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </Paper>
           </Grid>
         </Grid>
       </Container>
     </main>
+
   );
 }
