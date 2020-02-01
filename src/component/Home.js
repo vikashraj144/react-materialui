@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
     },
     avatar: {
         margin: theme.spacing(1),
+        marginLeft:'50%',
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
@@ -73,83 +74,89 @@ export default function SignIn(props) {
         event.preventDefault();
     };
     const onLogin = () => {
-        props.history.push('/dashboard');
+        // props.history.push('/dashboard');
+        console.log("TCL: onLogin -> props", props)
     }
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign in
+                <Grid item xs={10}>
+
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
                 </Typography>
-                {/* <Paper className={classes.paper2}> */}
+                    {/* <Paper className={classes.paper2}> */}
 
-                <form className={classes.form} noValidate>
-                <InputLabel htmlFor="standard-adornment-password">Email</InputLabel>
+                    <form className={classes.form} noValidate>
+                        <InputLabel htmlFor="standard-adornment-password">Email</InputLabel>
 
-                    <Input
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        autoFocus
-                        value={values.email}
-                        onChange={handleChange('email')}
-                    />
-                    <br></br>
-                    <br></br>
-                    
-                    <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                    <Input
-                        id="standard-adornment-password"
-                        margin="normal"
-                        required
-                        fullWidth
-                        label="Password"
-                        type={values.showPassword ? 'text' : 'password'}
-                        value={values.password}
-                        onChange={handleChange('password')}
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                >
-                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                        }
-                    />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        onClick={onLogin}
-                        className={classes.submit}
-                    >
-                        Sign In
+                        <Input
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            autoFocus
+                            value={values.email}
+                            onChange={handleChange('email')}
+                        />
+                        <br></br>
+                        <br></br>
+
+                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                        <Input
+                            id="standard-adornment-password"
+                            margin="normal"
+                            required
+                            fullWidth
+                            label="Password"
+                            type={values.showPassword ? 'text' : 'password'}
+                            value={values.password}
+                            onChange={handleChange('password')}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                    >
+                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Remember me"
+                        />
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            onClick={onLogin}
+                            className={classes.submit}
+                        >
+                            Sign In
                     </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
+                        <Grid container>
+                            <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    Forgot password?
                             </Link>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <br></br>
-                </form>
-                {/* </Paper> */}
+                        <br></br>
+                    </form>
+                    {/* </Paper> */}
+                </Grid>
             </Paper>
+
+
             <Box mt={8}>
                 <Copyright />
             </Box>
