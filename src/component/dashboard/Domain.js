@@ -48,6 +48,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Domain(props) {
+  console.log("TCL: Domain -> props", props)
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
@@ -69,7 +70,8 @@ export default function Domain(props) {
     props.history.push('/dashboard');
   }
   const onAddomain = () => {
-    props.history.push('/add-domain');
+    props.history.push('/dashboard/add-domain');
+    console.log("TCL: onAddomain -> props", props)
   }
   return (
     <main className={classes.content}>
