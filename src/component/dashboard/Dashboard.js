@@ -160,11 +160,9 @@ export default function Dashboard() {
           <Route path={`${path}/`} exact>
             <Main />
           </Route>
-          <Route path={`${path}/test1221`} exact>
-            <Deposits></Deposits>
+          <Route path={`${path}/test1221`} component={Deposits} exact>
           </Route>
-          <Route path={`${path}/domain`} exact>
-            <Domain></Domain>
+          <Route path={`${path}/domain`} component={Domain} exact>
           </Route>
           <Route path={`${path}/agency`} exact>
             <Agency></Agency>
